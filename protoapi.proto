@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+option go_package = "./;protoapi";
+
+// Define service
+
+service Random {
+    // Return date and time to the client
+    rpc GetDate (GetDateRequest) returns (GetDateResponse); 
+    // Return random integer to the client
+    rpc GetRandomInt (GetRandomIntRequest) returns (GetRandomIntResponse);
+    // Return randomly generated password of the given length
+    rpc GetRandomPass (GetRandomPassRequest) returns (GetRandomPassResponse);
+}
+
+// Define messages
+
+message GetDateRequest {
+    string Value = 2;
+}
+
+message GetDateResponse {
+    string Value = 1;
+}
+
+message GetRandomIntRequest {
+    int64 Seed = 1;
+    int64 Place = 2; // place of the random number in the generated sequence of random numbers
+}
+
+message GetRandomIntResponse {
+    int64 Value = 1;
+}
+
+message GetRandomPassRequest {
+    int64 Seed = 1;
+    int64 Length = 8;
+}
+
+message GetRandomPassResponse {
+    string Password = 1;
+}
